@@ -6,6 +6,8 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\Dislike;
+use App\Models\Answer;
+use App\Models\Question;
 
 class DislikeTest extends TestCase
 {
