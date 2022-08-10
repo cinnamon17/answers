@@ -7,6 +7,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\Answer;
 use App\Models\User;
+use App\Models\Question;
 
 class AnswerTest extends TestCase
 {
