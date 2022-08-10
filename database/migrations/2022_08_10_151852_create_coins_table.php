@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('coins', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->bigInteger('user_id');
+            $table->bigInteger('coins');
         });
     }
 

@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('dislikes', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->bigInteger('question_id');
             $table->bigInteger('answer_id');
+            $table->bigInteger('dislikes');
         });
     }
 

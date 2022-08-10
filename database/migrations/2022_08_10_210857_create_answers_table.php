@@ -18,6 +18,7 @@ return new class extends Migration
             $table->timestamps();
             $table->bigInteger('user_id');
             $table->bigInteger('question_id');
+            $table->text('content');
         });
     }
 
