@@ -37,6 +37,6 @@ class LikeTest extends TestCase
 
         $likes = Like::factory()->create();
 
-        $this->assertInstanceOf(Question::class, $likes->answer);
+        $this->assertInstanceOf(Question::class, $likes->question);
     }
 }
