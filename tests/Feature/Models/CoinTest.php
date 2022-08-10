@@ -24,6 +24,7 @@ class CoinTest extends TestCase
         $this->assertModelExists($coin);
 
     }
+
     public function test_coins_table_belongs_to_users_table()
     {
 
