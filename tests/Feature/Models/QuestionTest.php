@@ -7,6 +7,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\Question;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Collection;
 
 class QuestionTest extends TestCase
 {
@@ -31,5 +32,25 @@ class QuestionTest extends TestCase
         $this->assertInstanceOf(User::class, $question->user);
 
     }
+
+    public function test_questions_table_has_many_answers(){
+
+        $question = Question::factory()->create();
+
+        $this->assertInstanceOf(Collection::class, $question->answer);
+    }
  
+    public function test_questions_table_has_many_likes(){
+
+        $question = Question::factory()->create();
+
+        $this->assertInstanceOf(Collection::class, $question->likes);
+    }
+
+    public function test_questions_table_has_many_dislikes(){
+
+        $question = Question::factory()->create();
+
+        $this->assertInstanceOf(Collection::class, $question->dislikes);
+    }
 }

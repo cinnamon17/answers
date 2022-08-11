@@ -13,4 +13,19 @@ class Question extends Model
 
         return $this->belongsTo(User::class);
     }
+
+    public function answer(){
+
+        return $this->hasMany(Answer::class);
+    }
+
+    public function likes(){
+
+        return $this->hasMany(Like::class);
+    }
+
+    public function dislikes(){
+
+        return $this->hasMany(Dislike::class);
+    }
 }
