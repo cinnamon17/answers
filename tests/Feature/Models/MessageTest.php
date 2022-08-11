@@ -5,7 +5,7 @@ namespace Tests\Feature\Models;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use App\Models\Message;
-
+use Illuminate\Database\Eloquent\Collection;
 use Tests\TestCase;
 
 class MessageTest extends TestCase
@@ -22,4 +22,14 @@ class MessageTest extends TestCase
 
         $this->assertModelExists($message);
     }
+
+    public function test_messages_has_many_usermessages(){
+
+
+        $message = Message::factory()->create();
+
+        $this->assertInstanceOf(Collection::class, $message->usermessage);
+
+    }
+
 }

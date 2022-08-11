@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Models;
 
+use App\Models\Message;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -30,5 +31,12 @@ class UserMessageTest extends TestCase
         $usermessage = UserMessage::factory()->create();
 
         $this->assertInstanceOf(User::class, $usermessage->user);
+    }
+
+    public function test_usermessage_belongs_to_messages_table(){
+
+        $usermessage = UserMessage::factory()->create();
+
+        $this->assertInstanceOf(Message::class, $usermessage->message);
     }
 }
