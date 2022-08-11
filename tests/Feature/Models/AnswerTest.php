@@ -8,6 +8,7 @@ use Tests\TestCase;
 use App\Models\Answer;
 use App\Models\User;
 use App\Models\Question;
+use Illuminate\Database\Eloquent\Collection;
 
 class AnswerTest extends TestCase
 {
@@ -39,5 +40,24 @@ class AnswerTest extends TestCase
         $answer = Answer::factory()->create();
 
         $this->assertInstanceOf(Question::class, $answer->question);
+    }
+
+    public function test_answers_table_has_many_likes(){
+
+        $answer = Answer::factory()->create();
+
+        $this->assertInstanceOf(Collection::class, $answer->likes);
+
+
+    }
+
+    public function test_answers_table_has_many_dislikes(){
+
+
+        $answer = Answer::factory()->create();
+
+        $this->assertInstanceOf(Collection::class, $answer->dislikes);
+
+
     }
 }
