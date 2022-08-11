@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('likes', function (Blueprint $table) {
             $table->id();
+            $table->timestamps();
             $table->bigInteger('answer_id');
             $table->bigInteger('question_id');
             $table->bigInteger('likes');

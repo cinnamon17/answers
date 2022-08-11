@@ -21,7 +21,8 @@ class DislikeFactory extends Factory
         return [
 
             'question_id' => Question::factory(),
-            'answer_id' => Answer::factory()
+            'answer_id' => Answer::factory(),
+            'dislikes' => fake()->randomNumber()
         ];
     }
 }

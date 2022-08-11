@@ -19,7 +19,9 @@ class QuestionFactory extends Factory
     {
         return [
 
-            'user_id' => User::factory()
+            'user_id' => User::factory(),
+            'title' =>fake()->title,
+            'content' =>fake()->text
         ];
     }
 }

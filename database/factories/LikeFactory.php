@@ -21,7 +21,8 @@ class LikeFactory extends Factory
         return [
 
             'answer_id' => Answer::factory(),
-            'question_id' => Question::factory()
+            'question_id' => Question::factory(),
+            'likes' =>fake()->randomNumber()
         ];
     }
 }

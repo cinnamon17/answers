@@ -21,7 +21,8 @@ class AnswerFactory extends Factory
         return [
             
             'user_id' => User::factory(),
-            'question_id' => Question::factory()
+            'question_id' => Question::factory(),
+            'content' => fake()->text
         ];
     }
 }
