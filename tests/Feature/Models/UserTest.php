@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Models;
 
+use App\Models\Question;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -56,4 +57,5 @@ class UserTest extends TestCase
         $this->assertInstanceOf(Collection::class, $user->usermessage);
 
     }
+
 }
