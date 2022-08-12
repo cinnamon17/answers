@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\AnswerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,7 +16,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::resource('/', UserController::class);
+Route::resource('/answer', AnswerController::class)->middleware(['auth']);
+Route::resource('/question', QuestionController::class)->middleware(['auth']);
+Route::resource('/user', UserController::class)->middleware(['auth']);
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
