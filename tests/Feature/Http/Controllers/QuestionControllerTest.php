@@ -20,10 +20,14 @@ class QuestionControllerTest extends TestCase
     public function test_user_can_create_a_question(){
 
         $user = User::factory()->create();
-        $question = Question::factory()->create();
+        $question = Question::factory()->create([
+
+            'user_id' => $user->id
+        ]);
 
         $response = $this->actingAs($user)
                          ->post('/question', $question->attributesToArray())
+                         ->assertStatus(201)
                          ->assertRedirect('question.index');
 
         $this->assertAuthenticated();
@@ -40,7 +44,10 @@ class QuestionControllerTest extends TestCase
     public function test_user_can_delete_a_question(){
 
         $user = User::factory()->create();
-        $question = Question::factory()->create();
+        $question = Question::factory()->create([
+
+            'user_id' => $user->id
+        ]);
 
         $id = $question->getAttribute('id');
 
@@ -52,5 +59,26 @@ class QuestionControllerTest extends TestCase
 
         $this->assertDatabaseMissing('questions', $question->attributesToArray());
 
+    }
+
+    public function test_user_can_edit_a_question(){
+
+        $user = User::factory()->create();
+
+        $question = Question::factory()->create([
+
+            'user_id' => $user->id
+        ]);
+
+        $data = [
+            'title' => 'test',
+            'content' => 'content'
+        ];
+
+        $this->actingAs($user)
+             ->put("question/$question->id", $data)
+             ->assertRedirect("question/$question->id/edit");
+
+        $this->assertDatabaseHas('questions', $data);
     }
 }

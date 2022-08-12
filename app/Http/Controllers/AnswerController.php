@@ -72,7 +72,9 @@ class AnswerController extends Controller
      */
     public function update(Request $request, Answer $answer)
     {
-        //
+       $answer->update($request->all()); 
+
+       return redirect()->route("answer.edit", $answer);
     }
 
     /**
@@ -83,6 +85,8 @@ class AnswerController extends Controller
      */
     public function destroy(Answer $answer)
     {
-        //
+        $answer->delete();
+
+        return redirect('answer.index');
     }
 }

@@ -44,7 +44,7 @@ class QuestionController extends Controller
 
         $question = $request->user()->question()->create($request->all());
 
-        return redirect('question.index');
+        return redirect('question.index', 201);
     }
 
     /**
@@ -66,7 +66,7 @@ class QuestionController extends Controller
      */
     public function edit(Question $question)
     {
-        //
+
     }
 
     /**
@@ -78,7 +78,9 @@ class QuestionController extends Controller
      */
     public function update(Request $request, Question $question)
     {
-        //
+        $question->update($request->all());
+
+        return redirect()->route("question.edit", $question);
     }
 
     /**

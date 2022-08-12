@@ -6,6 +6,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\Answer;
+use App\Models\Question;
 use App\Models\User;
 
 
@@ -21,7 +22,17 @@ class AnswerControllerTest extends TestCase
     public function test_user_can_answer_a_question(){
 
         $user = User::factory()->create();
-        $answer = Answer::factory()->create();
+
+        $question = Question::factory()->create([
+
+            'user_id' => $user->id
+        ]);
+            
+        $answer = Answer::factory()->create([
+            
+            'question_id' => $question->id,
+            'user_id' => $question->user_id,
+        ]);
 
         $response = $this->actingAs($user)
                          ->post('answer', $answer->attributesToArray());
@@ -37,5 +48,51 @@ class AnswerControllerTest extends TestCase
         ]);
 
         $response->assertStatus(201);
+    }
+
+    public function test_user_can_delete_an_answer(){
+
+        $user = User::factory()->create();
+        $question = Question::factory()->create([
+
+            'user_id' => $user->id
+        ]);
+            
+        $answer = Answer::factory()->create([
+            
+            'question_id' => $question->id,
+            'user_id' => $question->user_id,
+        ]);
+
+        $this->actingAs($user)
+             ->delete("answer/$answer->id")
+             ->assertRedirect('answer.index');
+    }
+
+    public function test_user_can_edit_and_answer(){
+
+        $user = User::factory()->create();
+        $question = Question::factory()->create([
+
+            'user_id' => $user->id
+        ]);
+
+        $answer = Answer::factory()->create([
+
+            'user_id' => $question->user_id,
+            'question_id' => $question->id
+        ]);
+
+        $data = [
+            'content' => 'test answer'
+        ];
+
+       $response = $this->actingAs($user)
+            ->put("answer/$answer->id", $data);
+
+        $this->assertDatabaseHas('answers', $data);
+
+        $response->assertRedirect("answer/$answer->id/edit");
+        
     }
 }

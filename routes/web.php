@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\AnswerController;
@@ -18,7 +17,7 @@ use App\Http\Controllers\AnswerController;
 
 Route::resource('/answer', AnswerController::class)->middleware(['auth']);
 Route::resource('/question', QuestionController::class)->middleware(['auth']);
-Route::resource('/user', UserController::class)->middleware(['auth']);
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
