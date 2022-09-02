@@ -7,7 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Like extends Model
 {
+
     use HasFactory;
+
+    protected $fillable = [
+
+        'answer_id'
+    ];
 
     public function answer(){
 

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\AnswerController;
+use App\Http\Controllers\LikeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +18,7 @@ use App\Http\Controllers\AnswerController;
 
 Route::resource('/answer', AnswerController::class)->middleware(['auth']);
 Route::resource('/question', QuestionController::class)->middleware(['auth']);
+Route::resource('/like', LikeController::class)->middleware(['auth']);
 
 
 Route::get('/dashboard', function () {
