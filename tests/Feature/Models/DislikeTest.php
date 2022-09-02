@@ -8,6 +8,7 @@ use Tests\TestCase;
 use App\Models\Dislike;
 use App\Models\Answer;
 use App\Models\Question;
+use App\Models\User;
 
 class DislikeTest extends TestCase
 {
@@ -38,4 +39,5 @@ class DislikeTest extends TestCase
 
         $this->assertInstanceOf(Question::class, $dislike->question);
     }
+
 }
