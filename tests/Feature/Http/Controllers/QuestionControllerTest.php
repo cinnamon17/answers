@@ -97,4 +97,5 @@ class QuestionControllerTest extends TestCase
              ->assertSee($question->title)
              ->assertSee($question->content);
     }
+
 }

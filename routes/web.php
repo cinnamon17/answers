@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\DislikeController;
+use App\Http\Controllers\GuestController;
 use App\Http\Controllers\LikeController;
 
 /*
@@ -21,6 +22,7 @@ Route::resource('answer', AnswerController::class)->middleware(['auth']);
 Route::resource('question', QuestionController::class)->middleware(['auth']);
 Route::resource('like', LikeController::class)->middleware(['auth']);
 Route::resource('dislike', DislikeController::class)->middleware(['auth']);
+Route::resource('/', GuestController::class)->only(['index', 'show']);
 
 
 Route::get('/dashboard', function () {
