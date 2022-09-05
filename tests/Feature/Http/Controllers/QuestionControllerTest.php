@@ -81,4 +81,20 @@ class QuestionControllerTest extends TestCase
 
         $this->assertDatabaseHas('questions', $data);
     }
+
+    public function test_user_can_list_all_questions(){
+
+        $user = User::factory()->create();
+
+        $question = Question::factory()->create([
+
+            'user_id' => $user->id
+        ]);
+
+        $this->actingAs($user)
+             ->get('question')
+             ->assertStatus(200)
+             ->assertSee($question->title)
+             ->assertSee($question->content);
+    }
 }

@@ -17,10 +17,10 @@ use App\Http\Controllers\LikeController;
 |
 */
 
-Route::resource('/answer', AnswerController::class)->middleware(['auth']);
-Route::resource('/question', QuestionController::class)->middleware(['auth']);
-Route::resource('/like', LikeController::class)->middleware(['auth']);
-Route::resource('/dislike', DislikeController::class)->middleware(['auth']);
+Route::resource('answer', AnswerController::class)->middleware(['auth']);
+Route::resource('question', QuestionController::class)->middleware(['auth']);
+Route::resource('like', LikeController::class)->middleware(['auth']);
+Route::resource('dislike', DislikeController::class)->middleware(['auth']);
 
 
 Route::get('/dashboard', function () {
