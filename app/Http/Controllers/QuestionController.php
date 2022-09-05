@@ -27,7 +27,7 @@ class QuestionController extends Controller
      */
     public function create()
     {
-        //
+       return view('question.create');
     }
 
     /**
@@ -47,7 +47,7 @@ class QuestionController extends Controller
 
         $question = $request->user()->question()->create($request->all());
 
-        return redirect('question.index', 201);
+        return redirect()->route('question.index');
     }
 
     /**
@@ -70,6 +70,8 @@ class QuestionController extends Controller
     public function edit(Question $question)
     {
 
+        return view('question.edit', compact('question')); 
+
     }
 
     /**
@@ -83,7 +85,7 @@ class QuestionController extends Controller
     {
         $question->update($request->all());
 
-        return redirect()->route("question.edit", $question);
+        return redirect()->route("question.index");
     }
 
     /**
@@ -97,6 +99,7 @@ class QuestionController extends Controller
 
       $response = $question->delete(); 
     
-      return response($response, 204);
+      return redirect()->route('question.index');
+
     }
 }

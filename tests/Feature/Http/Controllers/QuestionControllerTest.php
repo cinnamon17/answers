@@ -17,7 +17,7 @@ class QuestionControllerTest extends TestCase
      *
      * @return void
      */
-    public function test_user_can_create_a_question(){
+    public function test_user_can_store_a_question(){
 
         $user = User::factory()->create();
         $question = Question::factory()->create([
@@ -27,8 +27,7 @@ class QuestionControllerTest extends TestCase
 
         $response = $this->actingAs($user)
                          ->post('/question', $question->attributesToArray())
-                         ->assertStatus(201)
-                         ->assertRedirect('question.index');
+                         ->assertRedirect('question');
 
         $this->assertAuthenticated();
 
@@ -41,7 +40,7 @@ class QuestionControllerTest extends TestCase
 
     }
 
-    public function test_user_can_delete_a_question(){
+    public function test_user_can_destroy_a_question(){
 
         $user = User::factory()->create();
         $question = Question::factory()->create([
@@ -49,19 +48,17 @@ class QuestionControllerTest extends TestCase
             'user_id' => $user->id
         ]);
 
-        $id = $question->getAttribute('id');
-
-        $response = $this->actingAs($user)->delete("question/$id");
+        $response = $this->actingAs($user)->delete("question/$question->id");
 
         $this->assertAuthenticated();
 
-        $response->assertStatus(204);
+        $response->assertRedirect('question');
 
         $this->assertDatabaseMissing('questions', $question->attributesToArray());
 
     }
 
-    public function test_user_can_edit_a_question(){
+    public function test_user_can_update_a_question(){
 
         $user = User::factory()->create();
 
@@ -77,7 +74,7 @@ class QuestionControllerTest extends TestCase
 
         $this->actingAs($user)
              ->put("question/$question->id", $data)
-             ->assertRedirect("question/$question->id/edit");
+             ->assertRedirect("question");
 
         $this->assertDatabaseHas('questions', $data);
     }
@@ -96,6 +93,53 @@ class QuestionControllerTest extends TestCase
              ->assertStatus(200)
              ->assertSee($question->title)
              ->assertSee($question->content);
+    }
+    
+    public function test_user_can_edit_a_question(){
+
+        $user = User::factory()->create();
+
+        $question = Question::factory()->create([
+
+            'user_id' => $user->id
+        ]);
+
+        $this->actingAs($user)
+            ->get("question/$question->id/edit")
+            ->assertSee($question->title)
+            ->assertSee($question->content);
+    }
+
+    public function test_edit_view_exists(){
+
+        $user = User::factory()->create();
+
+        $question = Question::factory()->create([
+
+            'user_id' => $user->id
+        ]);
+
+        $this->view('question.edit', ['question' => $question])
+                ->assertSee($question->title)
+                ->assertSee($question->content);
+    }
+
+    public function test_user_can_create_a_question(){
+
+        $user = User::factory()->create();
+
+        $this->actingAs($user)
+            ->get('question/create')
+            ->assertStatus(200);
+
+    }
+
+    public function test_create_view_exists(){
+
+        $user = User::factory()->create();
+
+        $this->view('question.create')
+            ->assertSee('form');
     }
 
 }

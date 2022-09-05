@@ -22,7 +22,7 @@ Route::resource('answer', AnswerController::class)->middleware(['auth']);
 Route::resource('question', QuestionController::class)->middleware(['auth']);
 Route::resource('like', LikeController::class)->middleware(['auth']);
 Route::resource('dislike', DislikeController::class)->middleware(['auth']);
-Route::resource('/', GuestController::class)->only(['index', 'show']);
+Route::resource('/', GuestController::class)->only(['index', 'show'])->name('index', 'public');
 
 
 Route::get('/dashboard', function () {
