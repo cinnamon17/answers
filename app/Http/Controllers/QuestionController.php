@@ -56,9 +56,16 @@ class QuestionController extends Controller
      * @param  \App\Models\Question  $question
      * @return \Illuminate\Http\Response
      */
-    public function show(Question $question)
+    public function show(Request $request, Question $question )
     {
-        //
+        if($request->user()->id != $question->user_id){
+
+            abort(403);
+        }
+
+        dd($request);
+
+       return view('question.show', compact('question'));
     }
 
     /**
@@ -67,8 +74,13 @@ class QuestionController extends Controller
      * @param  \App\Models\Question  $question
      * @return \Illuminate\Http\Response
      */
-    public function edit(Question $question)
+    public function edit(Request $request, Question $question)
     {
+
+        if($request->user()->id != $question->user_id){
+
+            abort(403);
+        }
 
         return view('question.edit', compact('question')); 
 
@@ -83,6 +95,11 @@ class QuestionController extends Controller
      */
     public function update(Request $request, Question $question)
     {
+        if($request->user()->id != $question->user_id){
+
+            abort(403);
+        }
+
         $question->update($request->all());
 
         return redirect()->route("question.index");
@@ -94,8 +111,13 @@ class QuestionController extends Controller
      * @param  \App\Models\Question  $question
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Question $question)
+    public function destroy(Request $request, Question $question)
     {
+
+        if($request->user()->id != $question->user_id){
+
+            abort(403);
+        }
 
       $response = $question->delete(); 
     

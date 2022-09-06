@@ -27,6 +27,12 @@ class DatabaseSeeder extends Seeder
             'user_id' => 1
         ]);
 
+        \App\Models\Answer::factory()->create([
+
+            'user_id' => 1,
+            'question_id' => 1,
+        ]);
+
         \App\Models\User::factory()->create([
 
             'id' => 2
@@ -35,6 +41,12 @@ class DatabaseSeeder extends Seeder
         \App\Models\Question::factory(2)->create([
 
             'user_id' => 2
+        ]);
+
+        \App\Models\Answer::factory()->create([
+
+            'user_id' => 2,
+            'question_id' => 2,
         ]);
 
         // \App\Models\User::factory()->create([

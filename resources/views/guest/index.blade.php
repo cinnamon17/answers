@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -11,18 +10,40 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body>
+    <body class="bg-gray-100">
+        <div class="">
+            @include('guest.navigation')
 
-        @include('guest.navigation')
-        
-        <div class="container mx-auto">
-@foreach($questions as $question)
+            <!-- Page Heading -->
+            <header class="container mx-auto">
 
-    <div class="m-8">
-        <div>{{ $question->title}} </div> 
-    {{ $question->content}}
+            </header>
 
+            <!-- Page Content -->
+            <main>
+
+
+
+@foreach ($questions as $question)
+
+    <div class= "container mx-10 my-10 ">
+
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 bg-white border-b border-gray-200">
+                    <div class="text-xl font-bold">{{ $question->title }} </div>
+                    <div>{{ $question->content}} </div>
+                    <div class="flex">
+
+
+            </div>
+                </div>
+            </div>
         </div>
+
+    </div>
 @endforeach
+            </main>
+        </div>
     </body>
 </html>

@@ -7,16 +7,11 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\User;
 use App\Models\Question;
-use App\Models\Answer;
 
 class QuestionControllerTest extends TestCase
 {
     use RefreshDatabase;
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
+
     public function test_user_can_store_a_question(){
 
         $user = User::factory()->create();
@@ -140,6 +135,35 @@ class QuestionControllerTest extends TestCase
 
         $this->view('question.create')
             ->assertSee('form');
+    }
+
+    public function test_user_can_show_a_question(){
+
+        $user = User::factory()->create();
+
+        $question = Question::factory()->create([
+
+            'user_id' => $user->id
+        ]);
+
+        $this->actingAs($user)
+            ->get("question/$question->id")
+            ->assertSessionHasNoErrors()
+            ->assertSee($question->title)
+            ->assertSee($question->content);
+
+    }
+    public function test_show_view_exists(){
+
+        $user = User::factory()->create();
+
+        $question = Question::factory()->create([
+
+            'user_id' => $user->id
+        ]);
+
+        $view = $this->view('question.show', ['question' => $question]);
+            $view->assertSee('div');
     }
 
 }

@@ -12,7 +12,7 @@
     </head>
     <body class="bg-gray-100">
         <div class="">
-            @include('layouts.navigation')
+            @include('guest.navigation')
 
             <!-- Page Heading -->
             <header class="container mx-auto">
@@ -22,10 +22,6 @@
             <!-- Page Content -->
             <main>
 
-        <a href = {{ route('question.create') }} class="rounded-full bg-green-200 px-3">Create</a>
-
-@foreach ($questions as $question)
-
     <div class= "container mx-10 my-10 ">
 
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -34,24 +30,14 @@
                     <div class="text-xl font-bold">{{ $question->title }} </div>
                     <div>{{ $question->content}} </div>
                     <div class="flex">
-        <a href = {{ route('question.show', ['question' => $question->id]) }} class="rounded-full bg-blue-400 px-3">ver</a>
-        <a href = {{ route('question.edit', ['question' => $question->id]) }} class="rounded-full bg-green-200 px-3">edit</a>
 
-        <form action=" {{ route('question.destroy', $question->id )}}" method="POST" >
 
-            @csrf
-            @method('DELETE')
-
-            <input type="submit" value="delete" class="rounded bg-red-200 px-3">
-
-            </form>
             </div>
                 </div>
             </div>
         </div>
 
     </div>
-@endforeach
             </main>
         </div>
     </body>
