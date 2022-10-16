@@ -14,12 +14,8 @@ class AnswerControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
-    public function test_user_can_answer_a_question(){
+
+    public function test_user_can_store_an_answer(){
 
         $user = User::factory()->create();
 
@@ -50,7 +46,7 @@ class AnswerControllerTest extends TestCase
         $response->assertStatus(201);
     }
 
-    public function test_user_can_delete_an_answer(){
+    public function test_user_can_destroy_an_answer(){
 
         $user = User::factory()->create();
         $question = Question::factory()->create([
@@ -66,10 +62,10 @@ class AnswerControllerTest extends TestCase
 
         $this->actingAs($user)
              ->delete("answer/$answer->id")
-             ->assertRedirect('answer.index');
+             ->assertRedirect('answer');
     }
 
-    public function test_user_can_edit_and_answer(){
+    public function test_user_can_update_an_answer(){
 
         $user = User::factory()->create();
         $question = Question::factory()->create([
@@ -94,5 +90,26 @@ class AnswerControllerTest extends TestCase
 
         $response->assertRedirect("answer/$answer->id/edit");
         
+    }
+
+    public function test_view_create_exists(){
+
+        $view = $this->view('answer.create');
+            $view->assertSee('');
+    }
+
+    public function test_user_can_answer_from_create_view(){
+
+        $user = User::factory()->create();
+
+        $answer = Answer::factory()->create([
+
+            'user_id' => $user->id
+        ]);
+
+        $this->actingAs($user)
+            ->get('answer/create')
+            ->assertSee('form');
+
     }
 }

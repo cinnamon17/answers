@@ -6,6 +6,7 @@ use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\DislikeController;
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\IndexController;
 
 /*
 |--------------------------------------------------------------------------

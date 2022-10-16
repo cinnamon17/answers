@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Answer;
 use App\Models\Question;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class GuestController extends Controller
 {
@@ -14,9 +16,10 @@ class GuestController extends Controller
      */
     public function index()
     {
-        $question = Question::all();
+        $question = DB::table('questions')->get();
+        $answer = DB::table('answers')->get();
 
-        return view('guest.index', ['questions' => $question ]);
+        return view('guest.index', ['questions' => $question, 'answers' => $answer]);
 
     }
 

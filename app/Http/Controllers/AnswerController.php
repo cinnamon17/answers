@@ -14,7 +14,10 @@ class AnswerController extends Controller
      */
     public function index()
     {
-        //
+
+        $question = Answer::all();
+
+        return view('answer.index', ['questions' => $question ]);
     }
 
     /**
@@ -24,7 +27,7 @@ class AnswerController extends Controller
      */
     public function create()
     {
-        //
+        return view('answer.create');
     }
 
     /**
@@ -87,6 +90,7 @@ class AnswerController extends Controller
     {
         $answer->delete();
 
-        return redirect('answer.index');
+       // return redirect('answer.index');
+       return redirect()->route("answer.index");
     }
 }

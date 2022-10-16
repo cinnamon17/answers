@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Http\Controllers;
 
+use App\Models\Answer;
 use App\Models\Question;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -23,18 +24,34 @@ class GuestControllerTest extends TestCase
             'user_id' => $user->id
         ]);
 
-        $second_user = User::factory()->create();
+        $response = $this->get('/');
+            
+            $response->assertSee($question->title);
+            $response->assertSee($question->content);
 
-        $second_question = Question::factory()->create([
+    }
 
-            'user_id' => $second_user->id
+    public function test_guest_can_list_all_answers(){
+
+
+        $user = User::factory()->create();
+
+        $question = Question::factory()->create([
+
+            'user_id' => $user->id
         ]);
 
-        $this->get('/')
-            ->assertSee($question->title)
-            ->assertSee($question->content)
-            ->assertSee($second_question->title)
-            ->assertSee($second_question->content);
+        $answer = Answer::factory()->create([
+
+            'question_id' => $question->id,
+            'user_id' => $user->id
+        ]);
+
+        $response = $this->get('/');
+            
+            $response->assertSee($question->title);
+            $response->assertSee($question->content);
+            $response->assertSee($answer->content);
 
     }
 }
