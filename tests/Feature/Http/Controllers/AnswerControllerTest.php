@@ -94,7 +94,7 @@ class AnswerControllerTest extends TestCase
 
     public function test_view_create_exists(){
 
-        $view = $this->view('answer.create');
+        $view = $this->view('answer.create', ['question_id' => 'data']);
             $view->assertSee('');
     }
 

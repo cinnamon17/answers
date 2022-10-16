@@ -41,7 +41,8 @@ class AnswerController extends Controller
 
        $answer = $request->user()->answer()->create($request->all());
 
-        return response()->noContent(201);
+        return redirect()->route('public', [], 201);
+        //return response()->noContent(201);
     }
 
     /**

@@ -52,7 +52,7 @@ class GuestController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**

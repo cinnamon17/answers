@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Http\Controllers;
 
+use App\Models\Answer;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -162,7 +163,9 @@ class QuestionControllerTest extends TestCase
             'user_id' => $user->id
         ]);
 
-        $view = $this->view('question.show', ['question' => $question]);
+        $answer = Answer::factory()->create();
+
+        $view = $this->view('question.show', ['question' => $question, 'answer' => $answer]);
             $view->assertSee('div');
     }
 

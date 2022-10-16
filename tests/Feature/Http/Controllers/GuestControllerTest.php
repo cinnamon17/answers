@@ -14,6 +14,7 @@ class GuestControllerTest extends TestCase
 
     use RefreshDatabase;
 
+
     public function test_guest_can_list_all_questions(){
 
 
@@ -53,5 +54,17 @@ class GuestControllerTest extends TestCase
             $response->assertSee($question->content);
             $response->assertSee($answer->content);
 
+    }
+
+    public function test_guest_view_can_be_rendered(){
+
+        $question = Question::factory()->create();
+        $answer = Answer::factory()->create();
+
+        $view = $this->view('guest.index', ['questions' => $question->all(), 'answers' => $answer->all()]);
+
+        $view->assertSee($question->title);
+        $view->assertSee($question->content);
+        $view->assertSee($answer->content);
     }
 }
